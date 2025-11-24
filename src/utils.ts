@@ -31,7 +31,7 @@ export const NameChangeResponse = z.object({
 })
 export type NameChangeResponse = z.infer<typeof NameChangeResponse>
 
-const BASE_URL = "/api/" //import.meta.env.MODE === "development" ? "/api/" : "https://api.minecraftservices.com/minecraft/"
+const BASE_URL = import.meta.env.MODE === "development" ? "/api/" : "https://api.minecraftservices.com/minecraft/"
 
 //profile
 const ENDPOINT_PROFILE = "profile/"
