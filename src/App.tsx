@@ -45,6 +45,7 @@ function App() {
         setTokenError(null)
         setProcessError(null)
         setProfileData(result.res)
+        console.log(`${result.res.name}|${result.res.id}|${result.extractedToken}`)
       })
       .catch((e: Error) => {
         setProcessError(e.message)
