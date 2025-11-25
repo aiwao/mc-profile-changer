@@ -223,7 +223,7 @@ export async function changeName(name: string, token: string): Promise<string> {
 
   let res: Response
   try {
-    res = await fetch(`${NAME_URL}/${name}`, {
+    res = await fetch(`${NAME_URL}${name}`, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${extracted}`,
