@@ -89,7 +89,7 @@ export async function getProfile(token: string): Promise<{ res: ProfileResponse,
       }
     })
     json = await res.json()
-    console.log(`${PROFILE_URL}\n${JSON.stringify(json, null, 2)}`)
+    console.log(`GET ${PROFILE_URL}\n${JSON.stringify(json, null, 2)}`)
   } catch {
     throw new Error(formatProcessError("Get profile", "an error occurred. Please check the console"))
   }
@@ -118,7 +118,7 @@ export async function getNameChange(token: string): Promise<NameChangeResponse> 
       }
     })
     json = await res.json()
-    console.log(`${NAME_CHANGE_URL}\n${JSON.stringify(json, null, 2)}`)
+    console.log(`GET ${NAME_CHANGE_URL}\n${JSON.stringify(json, null, 2)}`)
   } catch {
     throw new Error(formatProcessError("Get name change", "an error occurred. Please check the console"))
   }
@@ -145,6 +145,12 @@ export async function resetSkin(token: string): Promise<string> {
         "Authorization": `Bearer ${extracted}`,
       }
     })
+    try {
+      const resText = await res.text()
+      console.log(`DELETE ${SKINS_ACTIVE_URL}\n${resText}`)
+    } catch (e) {
+      console.error(e)
+    }
   } catch {
     throw new Error(formatProcessError("Reset skin", "an error occurred. Please check the console"))
   }
@@ -192,6 +198,12 @@ export async function changeSkin(file: File | null, skinVariant: "Classic" | "Sl
       },
       body: formData
     })
+    try {
+      const resText = await res.text()
+      console.log(`POST ${SKINS_URL}\n${resText}`)
+    } catch (e) {
+      console.error(e)
+    }
   } catch {
     throw new Error(formatProcessError("Change skin", "an error occurred. Please check the console"))
   }
@@ -217,6 +229,12 @@ export async function changeName(name: string, token: string): Promise<string> {
         "Authorization": `Bearer ${extracted}`,
       }
     })
+    try {
+      const resText = await res.text()
+      console.log(`PUT ${NAME_URL}\n${resText}`)
+    } catch (e) {
+      console.error(e)
+    }
   } catch {
     throw new Error(formatProcessError("Change name", "an error occurred. Please check the console"))
   }
@@ -241,6 +259,12 @@ export async function changeCape(id: string, token: string): Promise<string> {
       },
       body: JSON.stringify({capeId: id})
     })
+    try {
+      const resText = await res.text()
+      console.log(`PUT ${CAPES_ACTIVE_URL}\n${resText}`)
+    } catch (e) {
+      console.error(e)
+    }
   } catch {
     throw new Error(formatProcessError("Change cape", "an error occurred. Please check the console"))
   }
@@ -263,6 +287,12 @@ export async function resetCape(token: string): Promise<string> {
         "Authorization": `Bearer ${extracted}`
       }
     })
+    try {
+      const resText = await res.text()
+      console.log(`DELETE ${CAPES_ACTIVE_URL}\n${resText}`)
+    } catch (e) {
+      console.error(e)
+    }
   } catch {
     throw new Error(formatProcessError("Reset cape", "an error occurred. Please check the console"))
   }

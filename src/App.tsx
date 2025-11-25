@@ -3,7 +3,7 @@ import './App.css'
 import {
   changeCape, changeName, changeSkin, changeSkinWithURL,
   Data,
-  getNameChange, getProfile,
+  getNameChange, getProfile, isURL,
   MC_NAME_REGEX,
   NameChangeResponse,
   ProfileResponse, resetCape, resetSkin
@@ -43,10 +43,10 @@ function App() {
       .then(result => {
         setToken(result.extractedToken)
         setTokenError(null)
+        setProcessError(null)
         setProfileData(result.res)
       })
       .catch((e: Error) => {
-        console.log(newToken ?? token)
         setProcessError(e.message)
         setTokenError("Invalid token")
       })
@@ -147,8 +147,11 @@ function App() {
   }
 
   const onSkinURLChanged: ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (e.target.value === "")
+    if (e.target.value === "" || !isURL(e.target.value)) {
+      setPrioritizeURL(false)
       return
+    }
+
     const img = new Image();
     img.onload = () => {
       if (img.width === 64 && img.height === 64) {
