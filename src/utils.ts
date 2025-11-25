@@ -214,7 +214,7 @@ export async function changeSkin(file: File | null, skinVariant: "Classic" | "Sl
 }
 
 export async function changeName(name: string, token: string): Promise<string> {
-  if (MC_NAME_REGEX.test(name)) {
+  if (!MC_NAME_REGEX.test(name)) {
     throw new Error(formatProcessError("Change name", "entered name is invalid"))
   }
   const extracted = extractToken(token)
